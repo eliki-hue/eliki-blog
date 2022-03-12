@@ -35,6 +35,3 @@ config_options ={
     'development':DevConfig,
     'production':ProdConfig
 }
-
-    # https://newsapi.org/v2/top-headlines/sources=bbc?apiKey=bb5dc174241747118fdf8b391701fbe9
-    #GET https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=bb5dc174241747118fdf8b391701fbe9
