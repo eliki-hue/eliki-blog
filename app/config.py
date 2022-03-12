@@ -5,10 +5,9 @@ class Config:
     '''
     General configuration parent class
     '''
-    NEWS_API_BASE_URL='https://newsapi.org/v2/top-headlines/{}?apiKey={}'
-    ARTICLES_URL = 'https://newsapi.org/v2/top-headlines?sources={}&apiKey={}'
-
     
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://elijah:eliki13720@localhost:5433/pitch'
+   
 
 
 class ProdConfig(Config):

@@ -1,0 +1,24 @@
+{% extends 'bootstrap/base.html'%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        {% if title %}
+        <title> {{ title }}</title>
+        {% else %}
+        <title> Welcome News-finder-express </title>
+        {% endif %}
+        <link rel="stylesheet" href="../static/styles.css">
+    </head>
+  <body>
+      <!-- Navbar block  --> 
+      {% block navbar %}
+      {% include 'navbar.html' %}
+      {% endblock %}
+      <!-- Content block -->
+
+      {% block content %}
+
+      {% endblock %}
+  </body>
+</html>

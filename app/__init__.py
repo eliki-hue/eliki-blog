@@ -1,7 +1,7 @@
 from flask import Flask
 from .config import DevConfig,ProdConfig
 from flask_bootstrap import Bootstrap
-from flask import render_template, request
+from flask import request
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_mail import Mail
@@ -44,23 +44,10 @@ login_manager.init_app(app)
 from app import views
 
 
-
 # @login_manager.user_loader
 # def load_user(user_id):
 #     return User.query.get(int(id))
 
 
-
-
-
-
-    
-    
-
-
-  
-
-
 bootstrap = Bootstrap()
-
 
