@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+
+        </div>
+        <div class="col-md-4" style="background-color: aquamarine;">
+            
+            <div>
+                <h3>profile details</h3>
+            {{user.username}}
+            {{user.email}}
+            {{user.password}}
+            </div>
+            <div>
+                <a href="/pitchForm">create a pitch</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
