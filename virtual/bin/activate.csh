@@ -8,7 +8,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV "/home/elijah/Desktop/moringaschoolprojects/core-module/Flask/flask-ip-4/virtual"
+setenv VIRTUAL_ENV "/home/elijah/Desktop/moringaschoolprojects/core-module/Flask/flask-ip-3/virtual"
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/bin:$PATH"

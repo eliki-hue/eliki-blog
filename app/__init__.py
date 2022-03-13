@@ -1,7 +1,7 @@
 from flask import Flask
-from .config import DevConfig,ProdConfig
+from config import DevConfig,ProdConfig
 from flask_bootstrap import Bootstrap
-from flask import request
+from flask import render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_mail import Mail
@@ -22,7 +22,7 @@ bootstrap = Bootstrap()
 
 app =Flask(__name__,instance_relative_config=True)
 
-app.config.from_object(DevConfig)
+app.config.from_object(ProdConfig)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 MAIL_SERVER = 'smtp.googlemail.com'
@@ -43,11 +43,24 @@ login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
 from app import views
 
+from .models import User
 
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return User.query.get(int(id))
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(id))
+
+
+
+
+
+
+    
+    
+
+
+  
 
 
 bootstrap = Bootstrap()
+
 
