@@ -22,7 +22,7 @@ bootstrap = Bootstrap()
 
 app =Flask(__name__,instance_relative_config=True)
 
-app.config.from_object(ProdConfig)
+app.config.from_object(DevConfig)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 MAIL_SERVER = 'smtp.googlemail.com'
