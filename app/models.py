@@ -1,4 +1,5 @@
 from unicodedata import category
+from pytz import timezone
 
 from sqlalchemy import func
 from . import db
@@ -56,7 +57,7 @@ class Pitch(db.Model):
     upvote = db.Column(db.Integer)
     downvote = db.Column(db.Integer)
     comments = db.Column(db.String)
-    published_at = db.Column(db.DateTime, default = func.now())
+    published_at = db.Column(db.DateTime(timezone=True), default = func.now())
     
 
     def __init__(self, category, pitch, sender,sender_id, upvote, downvote,comments,published_at):

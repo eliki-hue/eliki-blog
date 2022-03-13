@@ -20,11 +20,10 @@ mail = Mail()
 
 bootstrap = Bootstrap()
 
-app =Flask(__name__,instance_relative_config=True)
 
-app.config.from_object(DevConfig)
+
+
 SECRET_KEY = os.urandom(32)
-app.config['SECRET_KEY'] = SECRET_KEY
 MAIL_SERVER = 'smtp.googlemail.com'
 MAIL_PORT = 587
 MAIL_USE_TLS = True
@@ -32,23 +31,31 @@ MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
 MAIL_PASSWORD =os.environ.get("mail_password")
 
 
-bootstrap.init_app(app)
-db.init_app(app)
-mail.init_app(app)
+def create_app():
+    app =Flask(__name__)
+    app.config.from_object(DevConfig)
 
-login_manager = LoginManager()
-# login_manager._session_protection ='strong'
-login_manager.login_view = 'auth.login'
+    app.config['SECRET_KEY'] = SECRET_KEY
+    bootstrap.init_app(app)
+    db.init_app(app)
+    mail.init_app(app)
 
-login_manager.init_app(app)
-from app import views
+    login_manager = LoginManager()
+    # login_manager._session_protection ='strong'
+    login_manager.login_view = 'views.login'
 
-from .models import User
+    login_manager.init_app(app)
+    from .views import views
+    app.register_blueprint(views, url_prefix= "/")
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(id))
+    from .models import User
 
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(id))
+
+
+    return app
 
 
 

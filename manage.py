@@ -1,10 +1,10 @@
-from app import  db, app
+from app import  db,create_app
 from flask_script import Manager, Server
 from flask_migrate import Migrate, MigrateCommand
 from app.models import User, Pitch
 
 
-
+app =create_app()
 
 
 manager = Manager(app)
