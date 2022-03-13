@@ -1,4 +1,6 @@
 from unicodedata import category
+
+from sqlalchemy import func
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -54,7 +56,7 @@ class Pitch(db.Model):
     upvote = db.Column(db.Integer)
     downvote = db.Column(db.Integer)
     comments = db.Column(db.String)
-    published_at = db.Column(db.DateTime, default = datetime.utcnow)
+    published_at = db.Column(db.DateTime, default = func.now())
     
 
     def __init__(self, category, pitch, sender,sender_id, upvote, downvote,comments,published_at):
