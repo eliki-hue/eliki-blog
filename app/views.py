@@ -1,5 +1,5 @@
 from unicodedata import category
-from flask_login import login_required, logout_user,logout_user
+from flask_login import current_user, login_required, login_user, logout_user,logout_user
 
 from .models import Pitch, User
 from .form import RegistrationForm
@@ -89,7 +89,7 @@ def profile():
         session['email']=user.email
         name = user.username
         mypitch= Pitch.query.filter_by(sender=name)  
-        logout_user(user, remember= True)
+        login_user(user, remember= True)
         return render_template('profile.html',user=user, mypitch=mypitch)
 
 
@@ -125,3 +125,8 @@ def display():
 def pitchsuccess():
     return render_template('pitchsuccess.html')
 
+
+@views.logout('/logout')
+def logout():
+    logout_user(current_user)
+    return render_template(url_for(views.index))
