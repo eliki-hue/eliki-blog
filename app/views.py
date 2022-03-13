@@ -1,4 +1,5 @@
-from flask_login import login_required
+from unicodedata import category
+from flask_login import login_required, logout_user,logout_user
 
 from .models import Pitch, User
 from .form import RegistrationForm
@@ -32,16 +33,32 @@ def success():
 
         username = request.form.get('username')
         email = request.form.get('email')
-        password = request.form.get('psw')
-        if db.session.query(User).filter(User.email ==email).count()==0:
+        password1 = request.form.get('psw1')
+        password2 = request.form.get('psw2')
+        email_exist=User.query.filter_by(email =email).first()
+        username_exist = User.query.filter_by(username =username).first()
+        if email_exist:
+            flash('User with that email address already exist', category='error')
+            return render_template('form.html', text ='User with that email address already exist')
 
-            print(username)
-            print(email)
-            print(password)
-            data = User(username,email,password=generate_password_hash(password, method='sha256'))
+        elif username_exist:
+            flash('User name already in use', category='error')
+            return render_template('form.html', text ='User name already in use.')
+
+        elif password1 != password2 :
+            flash( 'Password dont\'t match' , category='error')
+            return render_template('form.html', text ='Password don\'t match!')
+
+        elif len(password1) < 6:
+            flash('Password is too short', category='error')
+            return render_template('form.html', text ='password too short. use at least 6 characters')
+
+        else:
+            data = User(username,email,password=generate_password_hash(password1, method='sha256'))
 
             db.session.add(data)
             db.session.commit()
+            logout_user(data, remember=True)
             try:
                 sender_email(email, username)
             except:
@@ -49,7 +66,7 @@ def success():
             
             return render_template('success.html')
     
-        return render_template('form.html', text ='User with that email address already exist')
+       
 
 
 @views.route('/login' )
@@ -72,6 +89,7 @@ def profile():
         session['email']=user.email
         name = user.username
         mypitch= Pitch.query.filter_by(sender=name)  
+        logout_user(user, remember= True)
         return render_template('profile.html',user=user, mypitch=mypitch)
 
 
@@ -106,7 +124,4 @@ def display():
 @views.route('/pitchsuccess')
 def pitchsuccess():
     return render_template('pitchsuccess.html')
-
-
-
 
