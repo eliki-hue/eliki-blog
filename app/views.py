@@ -17,7 +17,7 @@ def index():
 
     record = Blog.query.all()
 
-    return render_template('index.html',pitches =record)
+    return render_template('index.html',blogs =record)
 
 
 @views.route("/register")
@@ -35,6 +35,8 @@ def success():
         email = request.form.get('email')
         password1 = request.form.get('psw1')
         password2 = request.form.get('psw2')
+        user_info =db.session.query(User).filter(User.email ==email)
+        
         email_exist=User.query.filter_by(email =email).first()
         username_exist = User.query.filter_by(username =username).first()
         if email_exist:
@@ -58,7 +60,7 @@ def success():
 
             db.session.add(data)
             db.session.commit()
-            logout_user(data, remember=True)
+            # logout_user(data)
             try:
                 sender_email(email, username)
             except:
@@ -107,7 +109,7 @@ def blog():
          
         
          category = request.form.get('category')
-         pitch = request.form.get('blog')
+         blog = request.form.get('blog')
          
          data = Blog(category, blog,0,0,'great')
          db.session.add(data)

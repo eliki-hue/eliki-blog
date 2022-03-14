@@ -19,7 +19,7 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
     password= db.Column(db.String(255))
-    pitches = db.relationship('Pitch', backref = 'user', lazy = 'dynamic')
+    # blogs = db.relationship('Blog', backref = 'user', lazy = 'dynamic')
 
     def __init__(self, username,email,password):
         self.username= username
@@ -54,17 +54,19 @@ class Blog(db.Model):
     blog =db.Column(db.String())
     upvote = db.Column(db.Integer)
     downvote = db.Column(db.Integer)
+    sender = db.Column(db.String())
     comments = db.Column(db.String)
     published_at = db.Column(db.DateTime(timezone=True), default = func.now())
     
 
-    def __init__(self, category, blog, upvote, downvote,comments,published_at):
+    def __init__(self, category, blog, upvote, downvote,sender,comments,published_at):
         self.category = category        
         self.blog = blog         
         self.upvote = upvote
         self.downvote = downvote
         self.comments = comments
         self.published_at =published_at
+        self.sender=sender
        
 
 

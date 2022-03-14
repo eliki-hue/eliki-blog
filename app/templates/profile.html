@@ -5,9 +5,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <H3>MY PITCHES</H3>
+            <H3>MY BLOGS</H3>
            <ul> 
-            {% for item in mypitch %}
+            {% for item in myblog %}
             
             {{item.pitch}} <br><br>
             {% endfor %}
@@ -20,7 +20,7 @@
             
             </div>
             <div>
-                <a href="{{url_for('views.pitchForm')}}">add pitch</a>
+                <a href="{{url_for('views.blogForm')}}">add pitch</a>
                
             </div>
             <div>
