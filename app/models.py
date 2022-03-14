@@ -46,25 +46,21 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return f'User {self.username}'
 
-class Pitch(db.Model):
+class Blog(db.Model):
     __tablename__ = 'pitches'
 
     id = db.Column(db.Integer, primary_key= True)
     category =db.Column(db.String(255))
-    pitch =db.Column(db.String())
-    sender_id = db.Column(db.Integer,db.ForeignKey('users.id')) 
-    sender = db.Column(db.String())
+    blog =db.Column(db.String())
     upvote = db.Column(db.Integer)
     downvote = db.Column(db.Integer)
     comments = db.Column(db.String)
     published_at = db.Column(db.DateTime(timezone=True), default = func.now())
     
 
-    def __init__(self, category, pitch, sender,sender_id, upvote, downvote,comments,published_at):
-        self.category = category
-        self.sender_id = sender_id
-        self.pitch = pitch 
-        self.sender =sender
+    def __init__(self, category, blog, upvote, downvote,comments,published_at):
+        self.category = category        
+        self.blog = blog         
         self.upvote = upvote
         self.downvote = downvote
         self.comments = comments

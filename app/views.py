@@ -1,7 +1,7 @@
 from unicodedata import category
 from flask_login import current_user, login_required, login_user, logout_user,logout_user
 
-from .models import Pitch, User
+from .models import Blog, Blog, User
 from .form import RegistrationForm
 from flask import render_template, request, url_for, flash,session, Blueprint
 from . import  db
@@ -15,7 +15,7 @@ views = Blueprint("views", __name__)
 @views.route('/')
 def index():
 
-    record = Pitch.query.all()
+    record = Blog.query.all()
 
     return render_template('index.html',pitches =record)
 
@@ -88,45 +88,47 @@ def profile():
             return render_template('login.html', text=text)
         session['email']=user.email
         name = user.username
-        mypitch= Pitch.query.filter_by(sender=name)  
+        mypitch= Blog.query.filter_by(sender=name)  
         login_user(user, remember= True)
         return render_template('profile.html',user=user, mypitch=mypitch)
 
 
             
-@views.route('/pitchForm')
-def pitchForm():
+@views.route('/blogForm')
+@login_required
+def blogForm():
 
-    return render_template('pitchForm.html')
+    return render_template('blogForm.html')
 
-@views.route('/pitch',methods=['GET','POST'])
-def pitch():
+@views.route('/blog',methods=['GET','POST'])
+def blog():
      
      if request.method == "POST":
          
-         sender = request.form.get('sender')
+        
          category = request.form.get('category')
-         pitch = request.form.get('pitch')
+         pitch = request.form.get('blog')
          
-         data = Pitch(category, pitch, sender,1,0,0,'great')
+         data = Blog(category, blog,0,0,'great')
          db.session.add(data)
          print(data)
          db.session.commit()
 
-     return render_template('pitchsuccess.html')
+     return render_template('blogsuccess.html')
 
 @views.route('/display')
 def display():
-    record = Pitch.query.all()
+    record = Blog.query.all()
 
-    return render_template('index.html',pitches =record)
+    return render_template('index.html',blogs =record)
 
-@views.route('/pitchsuccess')
-def pitchsuccess():
-    return render_template('pitchsuccess.html')
+@views.route('/blogsuccess')
+def blogsuccess():
+    return render_template('blogsuccess.html')
 
 
-@views.logout('/logout')
-def logout():
-    logout_user(current_user)
-    return render_template(url_for(views.index))
+# @views.route('/logout')
+# @login_required
+# def logout():
+#     logout_user(current_user.id)
+#     return render_template(url_for(views.index))
