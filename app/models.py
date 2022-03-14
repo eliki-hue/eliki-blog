@@ -47,7 +47,7 @@ class User(UserMixin,db.Model):
         return f'User {self.username}'
 
 class Blog(db.Model):
-    __tablename__ = 'pitches'
+    __tablename__ = 'blogs'
 
     id = db.Column(db.Integer, primary_key= True)
     category =db.Column(db.String(255))
