@@ -2,6 +2,8 @@ from unicodedata import category
 from pytz import timezone
 
 from sqlalchemy import func
+
+from app.views import blog
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -19,6 +21,7 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
     password= db.Column(db.String(255))
+    blog =db.relationship('Blog', backref= 'user', passive_deletes =True)
     # blogs = db.relationship('Blog', backref = 'user', lazy = 'dynamic')
 
     def __init__(self, username,email,password):
@@ -54,7 +57,7 @@ class Blog(db.Model):
     blog =db.Column(db.String())
     upvote = db.Column(db.Integer)
     downvote = db.Column(db.Integer)
-    sender = db.Column(db.String())
+    author = db.Column(db.Integer,db.ForeignKey('user.id', ondelete='CASCADE'), nullability=False)
     comments = db.Column(db.String)
     published_at = db.Column(db.DateTime(timezone=True), default = func.now())
     

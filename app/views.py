@@ -91,7 +91,7 @@ def profile():
         session['email']=user.email
         name = user.username
         mypitch= Blog.query.filter_by(sender=name)  
-        login_user(user, remember= True)
+        # login_user(user, remember= True)
         return render_template('profile.html',user=user, mypitch=mypitch)
 
 

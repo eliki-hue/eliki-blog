@@ -9,7 +9,7 @@
            <ul> 
             {% for item in myblog %}
             
-            {{item.pitch}} <br><br>
+            {{item.blog}} <br><br>
             {% endfor %}
             </ul>
         </div>
@@ -20,7 +20,7 @@
             
             </div>
             <div>
-                <a href="{{url_for('views.blogForm')}}">add pitch</a>
+                <a href="{{url_for('views.blogForm')}}">add blog</a>
                
             </div>
             <div>
