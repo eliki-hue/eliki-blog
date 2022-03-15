@@ -1,7 +1,7 @@
 from unicodedata import category
 from flask_login import current_user, login_required, login_user, logout_user,logout_user
 
-from .models import Blog, Blog, User
+from .models import Blog, User
 from .form import RegistrationForm
 from flask import render_template, request, url_for, flash,session, Blueprint
 from . import  db
@@ -90,14 +90,14 @@ def profile():
             return render_template('login.html', text=text)
         session['email']=user.email
         name = user.username
-        mypitch= Blog.query.filter_by(sender=name)  
+        
+        
         # login_user(user, remember= True)
-        return render_template('profile.html',user=user, mypitch=mypitch)
+        return render_template('profile.html',user=user)
 
 
             
 @views.route('/blogForm')
-@login_required
 def blogForm():
 
     return render_template('blogForm.html')
@@ -109,9 +109,16 @@ def blog():
          
         
          category = request.form.get('category')
+         sender = request.form.get('username')
          blog = request.form.get('blog')
+         image =request.form.get('image')
+         if image:
+             image_url=image
+         else:
+             image_url='no image'
+
          
-         data = Blog(category, blog,0,0,'great')
+         data = Blog(category, blog,0,0,'nice','great','11,2,2022')
          db.session.add(data)
          print(data)
          db.session.commit()

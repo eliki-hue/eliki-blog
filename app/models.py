@@ -3,7 +3,6 @@ from pytz import timezone
 
 from sqlalchemy import func
 
-from app.views import blog
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -21,8 +20,8 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
     password= db.Column(db.String(255))
-    blog =db.relationship('Blog', backref= 'user', passive_deletes =True)
-    # blogs = db.relationship('Blog', backref = 'user', lazy = 'dynamic')
+   
+    blogs = db.relationship('Blog', backref = 'user', lazy = 'dynamic')
 
     def __init__(self, username,email,password):
         self.username= username
@@ -55,21 +54,21 @@ class Blog(db.Model):
     id = db.Column(db.Integer, primary_key= True)
     category =db.Column(db.String(255))
     blog =db.Column(db.String())
-    upvote = db.Column(db.Integer)
-    downvote = db.Column(db.Integer)
-    author = db.Column(db.Integer,db.ForeignKey('user.id', ondelete='CASCADE'), nullability=False)
-    comments = db.Column(db.String)
+    title = db.Column(db.String)
+    image_url = db.Column(db.String)
+    link =db.Column(db.String())
+    author = db.Column(db.Integer,db.ForeignKey('users.id', ondelete='CASCADE'))
     published_at = db.Column(db.DateTime(timezone=True), default = func.now())
     
 
-    def __init__(self, category, blog, upvote, downvote,sender,comments,published_at):
+    def __init__(self, category, author, title, image_url,blog,link,published_at):
         self.category = category        
-        self.blog = blog         
-        self.upvote = upvote
-        self.downvote = downvote
-        self.comments = comments
+        self.author = author         
+        self.title = title
+        self.image_url = image_url
+        self.blog = blog
         self.published_at =published_at
-        self.sender=sender
+        self.link= link
        
 
 

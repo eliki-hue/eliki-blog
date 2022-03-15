@@ -9,17 +9,26 @@
     
         <div class="row"  >
            <ul>
-            {% for blog in blog %}
+            {% for blog in blogs %}
             
-                <div class="col-sm-7" style="background-color: rgb(173, 199, 224); margin-bottom: 20px;margin-right: px;" >{{blog.pitch}}</div><br><br>
-                <div class="col-sm-5" style=" margin-bottom: 20px;margin-right: px; min-height: max-content;">
-                sender: {{blog.sender}}  <button onclick="blog.upvote +=1" class="btn btn-sm btn-success" >{{blog.upvote}} <i class="fa fa-thumbs-up" id="like">Upvotes</i></button> 
-                  <button class="btn btn-sm btn-neutral" >{{blog.downvote}} <i class="fa fa-thumbs-up" id="like">Downvotes</i></button> 
+                <!-- <div class="col-sm-8" style="background-color: rgb(173, 199, 224); margin-bottom: 20px;margin-right: px;" >{{blog.blog}}</div><br><br>
+                <div class="col-sm-4" style=" margin-bottom: 20px;margin-right: px; min-height: max-content;">
+                
                         comments:    {{blog.comments}}  |     time published: {{blog.published_at}}
                  </div><br><br>
+             -->
             
-            
+                 <div class="card" style="width: 90%;">
+                    <img src="https://thumbs.dreamstime.com/z/scientific-molecule-background-medicine-science-technology-chemistry-template-wallpaper-banner-dna-molecules-dynamic-166387145.jpg" class="card-img-top" alt="..." style="width: 50%; height: auto;">
+                    <div class="card-body">
+                      <h5 class="card-title">{{blog.category}}</h5>
+                      <p class="card-text">{{blog.blog}}</p>
+                      <a href="#" class="btn btn-primary">Read more</a>
+                    </div>
+                  </div><br><br>
            
+
+
             {% endfor %}    
 
            </ul> 
