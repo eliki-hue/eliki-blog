@@ -1,6 +1,6 @@
 from unicodedata import category
 from flask_login import current_user, login_required, login_user, logout_user,logout_user
-
+from datetime import datetime
 from .models import Blog, User
 from .form import RegistrationForm
 from flask import render_template, request, url_for, flash,session, Blueprint
@@ -110,15 +110,19 @@ def blog():
         
          category = request.form.get('category')
          sender = request.form.get('username')
+         title = request.form.get('title')
+         image =request.form.get('image_url')
          blog = request.form.get('blog')
-         image =request.form.get('image')
+         link = request.form.get('link')
+         date = datetime.now()
+        
          if image:
              image_url=image
          else:
              image_url='no image'
 
          
-         data = Blog(category, blog,0,0,'nice','great','11,2,2022')
+         data = Blog(category,sender,title,image_url,blog,link,date)
          db.session.add(data)
          print(data)
          db.session.commit()
