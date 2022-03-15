@@ -33,7 +33,7 @@ MAIL_PASSWORD =os.environ.get("mail_password")
 
 def create_app():
     app =Flask(__name__)
-    app.config.from_object(DevConfig)
+    app.config.from_object(ProdConfig)
 
     app.config['SECRET_KEY'] = SECRET_KEY
     bootstrap.init_app(app)
