@@ -5,6 +5,7 @@ from .models import Blog, User
 from .form import RegistrationForm
 from flask import render_template, request, url_for, flash,session, Blueprint
 from . import  db
+from sqlalchemy import desc
 from werkzeug.security import generate_password_hash, check_password_hash
 from send_email import sender_email
 
@@ -109,12 +110,13 @@ def blog():
          
         
          category = request.form.get('category')
-         sender = request.form.get('username')
+         username = request.form.get('username')
          title = request.form.get('title')
          image =request.form.get('image_url')
          blog = request.form.get('blog')
          link = request.form.get('link')
-         date = datetime.now()
+         date = datetime.today().strftime('%Y-%m-%d')
+         
         
          if image:
              image_url=image
@@ -122,10 +124,11 @@ def blog():
              image_url='no image'
 
          
-         data = Blog(category,sender,title,image_url,blog,link,date)
+         data = Blog(category,username,title,image_url,blog,link,date)
          db.session.add(data)
          print(data)
          db.session.commit()
+         print(date)
 
      return render_template('blogsuccess.html')
 

@@ -18,13 +18,18 @@
                  </div><br><br>
              -->
             
-                 <div class="card" style="width: 90%;">
-                    <img src="https://thumbs.dreamstime.com/z/scientific-molecule-background-medicine-science-technology-chemistry-template-wallpaper-banner-dna-molecules-dynamic-166387145.jpg" class="card-img-top" alt="..." style="width: 50%; height: auto;">
+                 <div class="card" style="width: 100%;">
+                    <img src="{{blog.image_url}}" style="width: 70%; height: auto;">
                     <div class="card-body">
-                      <h5 class="card-title">{{blog.category}}</h5>
+                      <h2 class="card-title"> Title: {{blog.title}}
+                      </h2>
                       <p class="card-text">{{blog.blog}}</p>
-                      <a href="#" class="btn btn-primary">Read more</a>
+                      
+                      <p>posted: {{blog.published_at}}</p>
+                      <a href="{{blog.link}}" class="btn btn-primary" target="blank">Read more</a>
+                     
                     </div>
+
                   </div><br><br>
            
 

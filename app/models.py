@@ -21,7 +21,6 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(255),unique = True,index = True)
     password= db.Column(db.String(255))
    
-    blogs = db.relationship('Blog', backref = 'user', lazy = 'dynamic')
 
     def __init__(self, username,email,password):
         self.username= username
@@ -53,11 +52,11 @@ class Blog(db.Model):
 
     id = db.Column(db.Integer, primary_key= True)
     category =db.Column(db.String(255))
-    blog =db.Column(db.String())
+    author = db.Column(db.String())
     title = db.Column(db.String)
     image_url = db.Column(db.String)
-    link =db.Column(db.String())
-    author = db.Column(db.Integer,db.ForeignKey('users.id', ondelete='CASCADE'))
+    blog =db.Column(db.String())
+    link =db.Column(db.String())    
     published_at = db.Column(db.DateTime(timezone=True), default = func.now())
     
 
@@ -73,4 +72,4 @@ class Blog(db.Model):
 
 
     def __repr__(self):
-        return f'User {self.sender}'
+        return f'User {self.author}'
