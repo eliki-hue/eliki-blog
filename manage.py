@@ -9,7 +9,12 @@ app = create_app('production')
 
 
 manager = Manager(app)
+migrate = Migrate(app, db)
+
+
 manager.add_command('server', Server)
+manager.add_command('db', MigrateCommand)
+
 @manager.command
 def test():
     '''Run the unit tests'''
@@ -17,9 +22,6 @@ def test():
     tests = unittest.TestLoader().discover('tests')
     unittest.TextTestRunner(verbosity=2).run(tests)
 
-migrate = Migrate()
-migrate.init_app(app, db)
-manager.add_command('db', MigrateCommand)
 
 @manager.shell
 def make_shell_context():
