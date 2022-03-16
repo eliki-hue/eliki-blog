@@ -1,10 +1,12 @@
-from unicodedata import category
+from email.quoprimime import quote
 from flask_login import current_user, login_required, login_user, logout_user,logout_user
 from datetime import datetime
-from .models import Blog, User
+from .models import Blog, User,Quotes
 from .form import RegistrationForm
 from flask import render_template, request, url_for, flash,session, Blueprint
 from . import  db
+from .request import get_quotes
+import urllib.request, json
 
 from sqlalchemy import desc
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -18,10 +20,13 @@ views = Blueprint("views", __name__)
 def index():
 
     record = Blog.query.all()
-    # quotes= get_quotes()
-    # print(quotes.quote)
+   
 
-    return render_template('index.html',blogs =record, )
+    quotes=get_quotes()
+    print(quotes)
+   
+
+    return render_template('index.html',blogs =record, quotes=quotes )
 
 
 @views.route("/register")

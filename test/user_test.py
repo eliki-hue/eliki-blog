@@ -1,8 +1,8 @@
 import unittest
-from ..app import models
+from app.models import User
 
-User =models.User
 
+User=User
 
 class UserTest(unittest.TestCase):
      '''
@@ -13,7 +13,7 @@ class UserTest(unittest.TestCase):
         '''
         Set up method that will run before every Test
         '''
-        self.new_user = User('john', 'john@gmail.com',1111)
+        self.new_user = User('john', 'john@gmail.com',111111)
      def test_instance(self):
         self.assertTrue(isinstance(self.new_user,User))
 
