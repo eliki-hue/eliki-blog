@@ -5,7 +5,7 @@ from .models import Blog, User,Quotes
 from .form import RegistrationForm
 from flask import render_template, request, url_for, flash,session, Blueprint
 from . import  db
-from .request import get_quotes
+from .request import quote_fetch
 import urllib.request, json
 
 from sqlalchemy import desc
@@ -22,7 +22,7 @@ def index():
     record = Blog.query.all()
    
 
-    quotes=get_quotes()
+    quotes=quote_fetch()
     print(quotes)
    
 
