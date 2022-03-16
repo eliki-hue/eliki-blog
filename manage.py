@@ -2,9 +2,10 @@ from app import  db,create_app
 from flask_script import Manager, Server
 from flask_migrate import Migrate, MigrateCommand
 from app.models import User, Blog
+from config import ProdConfig
 
 
-app =create_app()
+app =create_app('production')
 
 
 manager = Manager(app)

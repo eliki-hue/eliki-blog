@@ -5,18 +5,21 @@ from .models import Blog, User
 from .form import RegistrationForm
 from flask import render_template, request, url_for, flash,session, Blueprint
 from . import  db
+
 from sqlalchemy import desc
 from werkzeug.security import generate_password_hash, check_password_hash
 from send_email import sender_email
 
 views = Blueprint("views", __name__)
 
-# app = create_app()
+
 
 @views.route('/')
 def index():
 
     record = Blog.query.all()
+    # quotes= get_quotes()
+    # print(quotes.quote)
 
     return render_template('index.html',blogs =record)
 
