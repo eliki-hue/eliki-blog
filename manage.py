@@ -5,7 +5,7 @@ from app.models import User, Blog
 from config import ProdConfig
 
 
-app =create_app('production')
+app = create_app('production')
 
 
 manager = Manager(app)

@@ -1,5 +1,5 @@
 from flask import Flask
-from config import DevConfig,ProdConfig
+from config import config_options
 from flask_bootstrap import Bootstrap
 from flask import render_template, request
 from flask_sqlalchemy import SQLAlchemy
@@ -31,10 +31,10 @@ MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
 MAIL_PASSWORD =os.environ.get("mail_password")
 
 
-def create_app():
+def create_app(config_name):
     app =Flask(__name__)
-    app.config.from_object(ProdConfig)
-
+    app.config.from_object(config_options[config_name])
+    config_options[config_name].init.app(app)
     app.config['SECRET_KEY'] = SECRET_KEY
     bootstrap.init_app(app)
     db.init_app(app)
