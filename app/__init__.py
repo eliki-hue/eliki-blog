@@ -35,7 +35,7 @@ def create_app(config_name):
     app =Flask(__name__)
     app.config.from_object(config_options[config_name])
    
-    app.config['SECRET_KEY'] = SECRET_KEY
+    app.config['SECRET_KEY'] = 'eliki13720'
     bootstrap.init_app(app)
     db.init_app(app)
     mail.init_app(app)
@@ -48,7 +48,7 @@ def create_app(config_name):
     from .views import views
     app.register_blueprint(views, url_prefix= "/")
 
-    from .models import User
+    from .models import User,Blog
 
     @login_manager.user_loader
     

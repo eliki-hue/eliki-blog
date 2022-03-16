@@ -1,5 +1,4 @@
-from unicodedata import category
-from pytz import timezone
+
 
 from sqlalchemy import func
 
@@ -52,11 +51,11 @@ class Blog(db.Model):
 
     id = db.Column(db.Integer, primary_key= True)
     category =db.Column(db.String(255))
-    author = db.Column(db.String())
-    title = db.Column(db.String)
-    image_url = db.Column(db.String)
-    blog =db.Column(db.String())
-    link =db.Column(db.String())    
+    author = db.Column(db.String(255))
+    title = db.Column(db.String(255))
+    image_url = db.Column(db.String(255))
+    blog =db.Column(db.String(10000))
+    link =db.Column(db.String(255))    
     published_at = db.Column(db.DateTime(timezone=True), default = func.now())
     
 
